@@ -35,3 +35,7 @@ Route::get('/', function () {
 Route::resource('mahasiswas', MahasiswaController::class);
 
 Route::get('/search', [SearchController::class, 'search']);
+
+Route::get('mahasiswas/nilai/{Nim}', [MahasiswaController::class, 'nilai'])->name('mahasiswas.nilai');
+
+
