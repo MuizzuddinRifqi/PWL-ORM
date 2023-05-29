@@ -4,6 +4,7 @@ use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ArticleController;
 
 
 
@@ -38,4 +39,4 @@ Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('mahasiswas/nilai/{Nim}', [MahasiswaController::class, 'nilai'])->name('mahasiswas.nilai');
 
-
+Route::resource('articles', ArticleController::class);
