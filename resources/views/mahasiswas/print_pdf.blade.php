@@ -1,12 +1,27 @@
 @extends('mahasiswas.layout')
 
+@section('css')
+    <style>
+        .table,
+        .table td,
+        .table th {
+            border: 1px solid;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container mt-5">
-        <h2 class="text-center mb-2">JURUSAN TEKNOLGI INFORMASI - POLITEKNIK NEGERI MALANG</h2>
+        <h2 class="text-center mb-5">JURUSAN TEKNOLGI INFORMASI - POLITEKNIK NEGERI MALANG</h2>
         <h2 class="text-center mb-4">KARTU HASIL STUDI (KHS)</h2>
 
         <div class="card-body">
-            <table class="table table-responsive" style="width: 25em">
+            <table style="width: 25em">
                 <tr>
                     <th>NAMA</th>
                     <th>:</th>
@@ -26,6 +41,8 @@
                 </tr>
             </table>
 
+            <br><br>
+
             <table class="table table-bordered">
                 <tr class="text-center">
                     <th>MATA KULIAH</th>
@@ -34,7 +51,7 @@
                     <th>NILAI</th>
                 </tr>
                 @foreach ($mahasiswa->matakuliah as $nilai)
-                    <tr class="text-center" >
+                    <tr class="text-center">
                         <td>{{ $nilai->Nama_Matkul }}</td>
                         <td>{{ $nilai->SKS }}</td>
                         <td>{{ $nilai->Semester }}</td>
@@ -42,11 +59,6 @@
                     </tr>
                 @endforeach
             </table>
-
-            <div class="text-center" >
-                <a class="btn btn-danger mt-3" href="{{ route('print_pdf', $mahasiswa->Nim) }}">CETAK NILAI</a>
-            </div>
-
 
         </div>
 

@@ -9,7 +9,7 @@ use App\Models\MataKuliah;
 use App\Models\Mahasiswa_MataKuliah;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class MahasiswaController extends Controller
@@ -136,7 +136,12 @@ class MahasiswaController extends Controller
 
     public function nilai($Nim){
         $mahasiswa = Mahasiswa::with('kelas', 'matakuliah')->find($Nim);
-
         return view('mahasiswas.nilai', compact('mahasiswa'));        
+    }
+
+    public function print_pdf($Nim){
+        $mahasiswa = Mahasiswa::where('nim', $Nim)->first();
+        $pdf = PDF::loadview('mahasiswas.print_pdf', compact('mahasiswa'));
+        return $pdf->stream('Kartu Nilai - '.$mahasiswa->nim.'.pdf');
     }
 }
