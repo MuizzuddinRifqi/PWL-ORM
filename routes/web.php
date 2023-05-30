@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArticleController;
+use App\Models\Article;
 
 
 
@@ -39,4 +40,5 @@ Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('mahasiswas/nilai/{Nim}', [MahasiswaController::class, 'nilai'])->name('mahasiswas.nilai');
 
+Route::get('/articles/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
 Route::resource('articles', ArticleController::class);
