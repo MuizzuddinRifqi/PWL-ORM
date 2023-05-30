@@ -32,6 +32,12 @@
                         </div>
 
                         <div class="form-group mb-3">
+                            <label for="Foto">Foto</label>
+                            <input type="file" name="Foto" class="form-control" id="Foto"
+                                accept="image/*">
+                        </div>
+
+                        <div class="form-group mb-3">
                             <label for="Kelas">Kelas</label>
                             <select name="Kelas" class="form-control">
                                 @foreach ($kelas as $kls)

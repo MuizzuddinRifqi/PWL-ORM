@@ -99,43 +99,29 @@ class MahasiswaController extends Controller
             'TTL' => 'required'
         ]);
 
+        $Mahasiswa = Mahasiswa::find($Nim);
+
+        
+        if($Mahasiswa->featured_image && file_exists(storage_path('app/public/'. $Mahasiswa->featured_image))){
+            Storage::delete('public/'. $Mahasiswa->Foto);
+        }
+        $image_name = $request->file('Foto')->store('images', 'public');
+        $Mahasiswa->Foto = $image_name;
+        
         Mahasiswa::where('Nim', $Nim)->update([
             'Nim' => $request->get('Nim'),
             'Nama' => $request->get('Nama'),
+            'Foto' => $image_name,
             'Jurusan' => $request->get('Jurusan'),
             'No_Handphone' => $request->get('No_Handphone'),
             'Email' => $request->get('Email'),
             'TTL' => $request->get('TTL'),
             'kelas_id' => $request->get('Kelas'),
         ]);
-
-        // $mahasiswa = Mahasiswa::with('kelas')->where('Nim', $Nim)->first();
-        // $mahasiswa->Nim = $request->get('Nim');
-        // $mahasiswa->Nama = $request->get('Nama');
-        // $mahasiswa->kelas_id = $request->get('Kelas');
-        // $mahasiswa->Jurusan = $request->get('Jurusan');
-        // $mahasiswa->No_Handphone = $request->get('No_Handphone');
-        // $mahasiswa->Email = $request->get('Email');
-        // $mahasiswa->TTL = $request->get('TTL');
-        // $mahasiswa->save();
-
-        // $kelas = new Kelas;
-        // $kelas->id = $request->get('Kelas');
-
-        // //fungsi eloquent untuk mengupdate data dengan relasi belongsTo
-        // $mahasiswa->kelas()->associate($kelas);
-        // $mahasiswa->save();
+        
 
         // jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('mahasiswas.index')->with('success', 'Mahasiswa Berhasil Diupdate');
-
-
-        // // Eloquent function for update data input
-        // Mahasiswa::where('Nim', $Nim) -> update($validateData);
-
-        // // If Success updating data, back to Homepage
-        // return redirect() -> route('mahasiswas.index') -> with('success', 'Mahasiswa Berhasil Diupdate');
-
     }
 
 
@@ -151,14 +137,6 @@ class MahasiswaController extends Controller
     public function nilai($Nim){
         $mahasiswa = Mahasiswa::with('kelas', 'matakuliah')->find($Nim);
 
-        return view('mahasiswas.nilai', compact('mahasiswa'));
-
-        // $matkul = $mahasiswa->matakuliah;
-        // return view('mahasiswas.nilai', [
-        //     'matkul' => $matkul,
-        //     'mahasiswa' => $mahasiswa
-        // ]);
-
-        
+        return view('mahasiswas.nilai', compact('mahasiswa'));        
     }
 }

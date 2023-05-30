@@ -32,6 +32,7 @@
             <th>NO</th>
             <th>NIM</th>
             <th>NAMA</th>
+            <th>FOTO</th>
             <th>KELAS</th>
             <th>JURUSAN</th>
             <th>NO HANDPHONE</th>
@@ -46,6 +47,10 @@
                 <td>{{ $no++ }}</td>
                 <td>{{ $Mahasiswa->Nim }}</td>
                 <td>{{ $Mahasiswa->Nama }}</td>
+                <td>
+                    <img width="100px" height="100px" src="{{ asset('storage/' . $Mahasiswa->Foto) }}"
+                        style="object-fit: cover">
+                </td>
                 <td>{{ $Mahasiswa->Kelas->nama_kelas }}</td>
                 <td>{{ $Mahasiswa->Jurusan }}</td>
                 <td>{{ $Mahasiswa->No_Handphone }}</td>
